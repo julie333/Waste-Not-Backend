@@ -1,0 +1,90 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.2.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+jar {
+	baseName = 'wasteNot'
+	version = '1.0.0-m1'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+ext.assertJVersion         = '3.6.2'
+ext.hibernateVersion       = '5.2.8.Final'
+ext.jacksonDateTimeVersion = '2.8.7'
+ext.wiserVersion           = '3.1.7'
+ext.log4jVersion    	   = '2.8'
+ext.mailVersion    	 	   = '1.4.7'
+ext.mockitoVersion 		   = '2.7.0'
+// Special syntax for overriding spring-boot-dependencies
+ext['hibernate.version'] = hibernateVersion
+
+
+repositories {
+	mavenCentral()
+}
+
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-actuator')
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('org.springframework.boot:spring-boot-starter-jdbc')
+	compile('org.springframework.boot:spring-boot-starter-mail')
+	compile('org.springframework.boot:spring-boot-starter-security')
+	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonDateTimeVersion}")
+	compile("org.hibernate:hibernate-java8:${hibernateVersion}")
+	compile("org.apache.logging.log4j:log4j-api:${log4jVersion}")
+	compile group: 'com.cloudinary', name: 'cloudinary-http43', version: '1.2.2'
+	
+
+	runtime("org.apache.logging.log4j:log4j-core:${log4jVersion}")
+	runtime('org.springframework.boot:spring-boot-devtools')
+	runtime('com.h2database:h2')
+
+	compileOnly('org.projectlombok:lombok')
+	
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile('org.springframework.security:spring-security-test')
+    testCompile("org.assertj:assertj-core:${assertJVersion}")
+    	testCompile("org.mockito:mockito-core:${mockitoVersion}")
+    testCompile("org.subethamail:subethasmtp:${wiserVersion}")
+}
+
+task showMeCache {
+	doLast {
+		println('compileOnly dependencies:')
+		configurations.compileOnly.each { println it }
+		println('compile dependencies:')
+		configurations.compile.each { println it }
+		println('runtime dependencies:')
+		configurations.runtime.each { println it }
+		println('testCompile dependencies:')
+		configurations.testCompile.each { println it }
+	}
+}
+
+eclipse.project {
+	natures 'org.springframework.ide.eclipse.core.springnature'
+	buildCommand 'org.springframework.ide.eclipse.core.springbuilder'
+}
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '3.4'
+}
+
