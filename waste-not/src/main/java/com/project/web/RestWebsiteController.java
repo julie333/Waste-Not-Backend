@@ -73,16 +73,19 @@ public class RestWebsiteController {
 		else return loginUser;
 	}
 	
-	@JsonView(JsonViews.NewUser.class)	 
+ 
 	@PostMapping("/searchedproducts")
-	public List<Product> searchedproducts(@RequestBody Product searchedProduct) {
+	public List<Product> searchedproducts(@RequestBody String searchedProduct) {
 		
-		System.err.println(searchedProduct);
+		
+		String searchItem = searchedProduct.substring(searchedProduct.indexOf(":")+2,
+													 searchedProduct.indexOf("}")-1);
 		
 		List<Product> products= new ArrayList<>();
 		List<Product> searchProductsList = new ArrayList<>();
 
-		products = this.productservice.findByProductName(searchedProduct.getProductName());
+
+		products = this.productservice.findByProductName(searchItem);
 			
 		if (products.isEmpty()) {
 			return searchProductsList;
@@ -92,6 +95,26 @@ public class RestWebsiteController {
 			return searchProductsList;
 		}
 		
+	}
+	
+	@JsonView(JsonViews.Public.class)
+	@GetMapping("/quotes")
+	public String fetchRandomnQuote() {
+		
+		List<String> quotes = new ArrayList<>();
+				
+		quotes.add("Destroying rainforest for economic gain is like burning a Renaissance painting to cook a meal. - E. O. Wilson");
+		quotes.add("By polluting clear water with slime you will never find good drinking water. - Aeschylus");	 
+		quotes.add("It makes a big difference to recycle. It makes a big difference to use recycled products. It makes a big difference to reuse things, to not use the paper cup -"
+				+ " and each time you do, that's a victory. Emily Deschanel");
+		quotes.add("Because the living environment is what really sustains us. - E. O. Wilson");	 
+		
+
+		
+		int randomn = (int) (Math.floor(Math.random())*4);
+		System.err.println("cdfvgbhjnmk");
+		return quotes.get(randomn);
+
 	}
 	
 }
