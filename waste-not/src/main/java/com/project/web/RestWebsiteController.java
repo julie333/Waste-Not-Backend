@@ -80,6 +80,7 @@ public class RestWebsiteController {
 		
 		String searchItem = searchedProduct.substring(searchedProduct.indexOf(":")+2,
 													 searchedProduct.indexOf("}")-1);
+		System.err.println(searchItem);
 		
 		List<Product> products= new ArrayList<>();
 		List<Product> searchProductsList = new ArrayList<>();
@@ -97,6 +98,31 @@ public class RestWebsiteController {
 		
 	}
 	
+	@PostMapping("/searchedusers")
+	public List<User> searchedusers(@RequestBody String searchedUser) {
+			
+		List<User> users= new ArrayList<>();
+		List<User> searchUsersList = new ArrayList<>();
+
+		System.err.println(searchedUser);
+		
+		String searchItem = searchedUser.substring(1,searchedUser.length()-1);
+		
+		System.err.println("HEREEEEEEEEE" + searchItem);
+
+		users = this.userservice.findUsers(searchItem);
+			
+		if (users.isEmpty()) {
+			return searchUsersList;
+		}
+		else{
+			searchUsersList.addAll(users);
+			System.err.println(searchUsersList);
+			return searchUsersList;
+		}
+		
+	}
+
 	@JsonView(JsonViews.Public.class)
 	@GetMapping("/quotes")
 	public String fetchRandomnQuote() {

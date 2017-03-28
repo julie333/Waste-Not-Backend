@@ -105,13 +105,24 @@ public class User implements Serializable {
 	@ManyToMany
 	@JsonView(JsonViews.Public.class)
 	@JsonIgnoreProperties({ "email", "productsPosted", "productsShared", "productsRecieved", "productsRequestedByUser",
-			"productsRequestedByOthers", "friends", "location","groups"})
+			"productsRequestedByOthers", "friends", "location","groups", "friendsRequests", "groupRequests"})
 	private List<User> friends = new ArrayList<>();
 
 	@ManyToMany
 	@JsonView(JsonViews.Public.class)
 	@JsonIgnoreProperties({ "members" })
 	private List<Group> groups = new ArrayList<>();
+	
+	@ManyToMany
+	@JsonView(JsonViews.Public.class)
+	@JsonIgnoreProperties({ "members"})
+	private List<Group> groupRequests = new ArrayList<>();
+	
+	@ManyToMany
+	@JsonView(JsonViews.Public.class)
+	@JsonIgnoreProperties({ "email", "productsPosted", "productsShared", "productsRecieved", "productsRequestedByUser",
+			"productsRequestedByOthers", "friends", "location","groups", "friendsRequests", "groupRequests"})
+	private List<User> friendsRequests = new ArrayList<>();
 
 	public User() {
 	}
@@ -119,7 +130,8 @@ public class User implements Serializable {
 	public User(String firstName, String lastName, String email, String username, String password, String avatar,
 			Location location, List<Product> productsPosted, List<Product> productsShared,
 			List<Product> productsRecieved, List<Product> productsRequestedByUser,
-			List<Product> productsRequestedByOthers, List<User> friends, List<Group> groups) {
+			List<Product> productsRequestedByOthers, List<User> friends, 
+			List<Group> groups,  List<Group> groupRequests, List<User> friendsRequests ) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -135,6 +147,8 @@ public class User implements Serializable {
 		this.productsRequestedByOthers = productsRequestedByOthers;
 		this.friends = friends;
 		this.groups = groups;
+		this.groupRequests = groupRequests;
+		this.friendsRequests = friendsRequests;
 	}
 
 }

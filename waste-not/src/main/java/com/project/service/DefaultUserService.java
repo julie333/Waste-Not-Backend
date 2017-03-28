@@ -239,9 +239,9 @@ public class DefaultUserService implements UserService {
 		Product product = productRepository.findOne(productId);
 		User userRequestingForProduct = userRepository.findOne(userId);
 		User productOwner = userRepository.findOne(product.getProductOwner().getId());
-		
+
 		// Add To Requested Users ProductsRequestedByUser List
-		
+
 		if (userRequestingForProduct.getProductsRequestedByUser().isEmpty()) {
 			List<Product> productsRequestedByUserList = new ArrayList<>();
 			userRequestingForProduct.setProductsRequestedByUser(productsRequestedByUserList);
@@ -250,7 +250,7 @@ public class DefaultUserService implements UserService {
 		} else {
 			userRequestingForProduct.getProductsRequestedByUser().add(product);
 		}
-		
+
 		product.getRequestList().add(userRequestingForProduct.getId());
 
 		// Add To Product Owners ProductsRequestedByOthers List
@@ -277,7 +277,7 @@ public class DefaultUserService implements UserService {
 		} else {
 			userRequestingForProduct.getProductsRequestedByUser().remove(product);
 		}
-		
+
 		product.getRequestList().remove(userRequestingForProduct.getId());
 
 		if (productOwner.getProductsRequestedByOthers().isEmpty()) {
@@ -331,5 +331,43 @@ public class DefaultUserService implements UserService {
 			user.getProductsRecieved().add(product);
 		}
 	}
+
+	@Override
+	public List<User> findUsers(String userName) {
+		return this.userRepository.findUsers(userName);
+	}
+
+	@Override
+	public void addToGroupRequests(Long userId, Long groupId) {
+
+		User user = this.userRepository.findOne(userId);
+		Group group = this.groupRepository.findOne(groupId);
+
+		if (user.getGroupRequests().isEmpty()) {
+			List<Group> groupRequests = new ArrayList<>();
+			user.setGroupRequests(groupRequests);
+			user.getGroupRequests().add(group);
+
+		} else {
+			user.getGroupRequests().add(group);
+		}
+		System.err.println(user.getGroupRequests());
+
+	}
+
+	@Override
+	public void removeFromGroupRequests(Long userId, Long groupId) {
+		
+		User user = this.userRepository.findOne(userId);
+		Group group = this.groupRepository.findOne(groupId);
+		
+		if(user.getGroupRequests().isEmpty()) {
+
+		} else {
+			user.getGroupRequests().remove(group);
+		}
+	}
+	
+
 
 }

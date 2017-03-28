@@ -103,11 +103,13 @@ public class RestUserController {
 	}
 
 	// Join/Leave Group
-	@PostMapping("/{id}/groups/{groupId}/toggle")
-	public void joinEvent(@PathVariable Long groupId, @RequestBody Long userId) {
+	@GetMapping("/{userId}/groups/{groupId}/toggle")
+	public void joinEvent( @PathVariable Long userId, @PathVariable Long groupId) {
 
 		User user = userservice.findById(userId);
 		Group group = this.groupservice.findById(groupId);
+		
+		this.userservice.removeFromGroupRequests(userId, groupId);
 
 		if (user.getGroups().contains(group)) {
 			this.userservice.leaveGroup(userId, groupId);
@@ -145,19 +147,6 @@ public class RestUserController {
 		}
 	}
 
-	@ManyToMany
-	@OrderBy("datePosted")
-	@JsonView(JsonViews.Public.class)
-	private List<Product> productsRequestedByUser = new ArrayList<>();
-
-	@ManyToMany
-	@OrderBy("datePosted")
-	@JsonView(JsonViews.Public.class)
-	@JsonIgnoreProperties({ "productOwner" })
-	private List<Product> productsRequestedByOthers = new ArrayList<>();
-
-
-	
 	// Toggle ProductsRequested 
 	// ProductId - Products Requested / UserId - User Requesting for product
     // Product Owner should get notification
@@ -176,6 +165,16 @@ public class RestUserController {
 			this.userservice.addToProductsRequestedByUser(userId, productId);
 		}
 		
+	}
+	
+	@GetMapping("/grouprequest/add/{userId}/{groupId}")
+	public void addToGroupRequests(@PathVariable Long userId, @PathVariable Long groupId) {
+		this.userservice.addToGroupRequests(userId, groupId);
+	}
+	
+	@GetMapping("/grouprequest/remove/{userId}/{groupId}")
+	public void removeGroupRequests(@PathVariable Long userId, @PathVariable Long groupId) {
+		this.userservice.removeFromGroupRequests(userId, groupId);
 	}
 
 	// Delete User

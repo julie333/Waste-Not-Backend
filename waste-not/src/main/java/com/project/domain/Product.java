@@ -76,7 +76,7 @@ public class Product implements Serializable {
 	@ManyToOne(optional = true)
 	@JsonView(JsonViews.Public.class)
 	@JsonIgnoreProperties({ "productsPosted","productsShared","productsRecieved",
-		"productsRequestedByUser","productsRequestedByOthers","friends","location","wishList","groups"}) 
+		"productsRequestedByUser","productsRequestedByOthers","friends","location","wishList","groups","friendsRequests", "groupRequests"}) 
 	private User productOwner;
 
 	@Column(name = "available",  nullable = true)

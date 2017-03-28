@@ -52,14 +52,16 @@ public class Group implements Serializable {
 	@ManyToOne(optional = true)
 	@JsonView(JsonViews.Public.class)
 	@JsonIgnoreProperties({ "productsPosted","productsShared","productsRecieved",
-		"productsRequestedByUser","productsRequestedByOthers","friends","location","groups","wishList"}) 
+		"productsRequestedByUser","productsRequestedByOthers","friends","location","groups","wishList",
+		"friendsRequests", "groupRequests"}) 
 	private User admin;
 
 	@ManyToMany
 	@OrderBy("last_name")
 	@JsonView(JsonViews.Public.class)
 	@JsonIgnoreProperties({ "productsPosted","productsShared","productsRecieved",
-		"productsRequestedByUser","productsRequestedByOthers","friends","location","groups"}) 
+		"productsRequestedByUser","productsRequestedByOthers","friends","location","groups",
+		"friendsRequests", "groupRequests"}) 
 	private List<User> members = new ArrayList<>();
 	
 	@ManyToMany

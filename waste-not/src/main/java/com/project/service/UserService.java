@@ -18,6 +18,8 @@ public interface UserService {
 	public List<User> findAll();
 	
 	public User findByUsername(String username);
+	
+	public List<User> findUsers(String userName);
 
 	public List<Product> findAllProductsOfUserById(Long userId);
 		
@@ -44,5 +46,9 @@ public interface UserService {
 	public void addToProductsRequestedByUser(Long userId, Long productId);
 	
 	public void deleteProductsRequestedByUser(Long userId, Long productId);
+	
+	public void addToGroupRequests(Long userId, Long groupId);
+	
+	public void removeFromGroupRequests(Long userId, Long groupId);
 	
 }
