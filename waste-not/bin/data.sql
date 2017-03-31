@@ -27,31 +27,31 @@ insert into users(id, email,first_name,last_name,password,username,location_id, 
  values (1,'fake1@fake.com','Lola','Lolly','a','a',1,'http://icons.iconarchive.com/icons/hopstarter/face-avatars/128/Female-Face-FA-4-icon.png');
 
 insert into users(id, email,first_name,last_name,password,username,location_id, avatar) 
- values (2,'fake2@fake.com','Jenny','Jade','password','jenny',2,'http://icons.iconarchive.com/icons/hopstarter/face-avatars/128/Female-Face-FH-4-slim-icon.png');
+ values (2,'fake2@fake.com','Jenny','Jade','a','jenny',2,'http://icons.iconarchive.com/icons/hopstarter/face-avatars/128/Female-Face-FH-4-slim-icon.png');
 
 insert into users(id, email,first_name,last_name,password,username,location_id, avatar) 
-values (3,'fake3@fake.com','Delyla','Delux','password','della','3','http://icons.iconarchive.com/icons/hopstarter/face-avatars/128/Female-Face-FA-4-icon.png');
+values (3,'fake3@fake.com','Delyla','Delux','a','della','3','http://icons.iconarchive.com/icons/hopstarter/face-avatars/128/Female-Face-FA-4-icon.png');
 
 insert into users(id, email,first_name,last_name,password,username,location_id, avatar) 
-values (4, 'fake4@fake.com','Rose',  'Dorn','password','rosy',4,'http://icons.iconarchive.com/icons/hopstarter/face-avatars/128/Female-Face-FA-4-icon.png');
+values (4, 'fake4@fake.com','Rose',  'Dorn','a','rosy',4,'http://icons.iconarchive.com/icons/hopstarter/face-avatars/128/Female-Face-FA-4-icon.png');
 
 insert into users(id, email,first_name,last_name,password,username,location_id, avatar)  
-values (5, 'fake5@fake.com','Abbey',  'Broken','password','abbey', 5,'http://icons.iconarchive.com/icons/hopstarter/face-avatars/128/Male-Face-A2-icon.png');
+values (5, 'fake5@fake.com','Abbey',  'Broken','a','abbey', 5,'http://icons.iconarchive.com/icons/hopstarter/face-avatars/128/Male-Face-A2-icon.png');
 
 insert into users(id, email,first_name,last_name,password,username,location_id, avatar) 
-values (6, 'fake6@fake.com', 'Francine',  'Smith','password','francy',6,'http://icons.iconarchive.com/icons/hopstarter/face-avatars/128/Female-Face-FA-4-icon.png');
+values (6, 'fake6@fake.com', 'Francine',  'Smith','a','francy',6,'http://icons.iconarchive.com/icons/hopstarter/face-avatars/128/Female-Face-FA-4-icon.png');
 
 insert into users(id, email,first_name,last_name,password,username,location_id, avatar) 
-values (7,'fake7@fake.com','Pemmela','Rock','password','pemmy',2,'http://icons.iconarchive.com/icons/hopstarter/face-avatars/256/Female-Face-FI-2-icon.png');
+values (7,'fake7@fake.com','Pemmela','Rock','a','pemmy',2,'http://icons.iconarchive.com/icons/hopstarter/face-avatars/256/Female-Face-FI-2-icon.png');
 
 insert into users(id, email,first_name,last_name,password,username,location_id, avatar) 
-values (8,'fake8@fake.com','Courtney','Sweets','password','courtney',5,'http://icons.iconarchive.com/icons/hopstarter/face-avatars/256/Female-Face-FI-2-icon.png');
+values (8,'fake8@fake.com','Courtney','Sweets','a','courtney',5,'http://icons.iconarchive.com/icons/hopstarter/face-avatars/256/Female-Face-FI-2-icon.png');
 
 insert into users(id, email,first_name,last_name,password,username,location_id, avatar) 
-values (9,'fake9@fake.com','Jennifer','Jody','password','jennifer',7,'http://icons.iconarchive.com/icons/hopstarter/face-avatars/256/Female-Face-FI-2-icon.png');
+values (9,'fake9@fake.com','Jennifer','Jody','a','jennifer',7,'http://icons.iconarchive.com/icons/hopstarter/face-avatars/256/Female-Face-FI-2-icon.png');
 
 insert into users(id, email,first_name,last_name,password,username,location_id, avatar) 
-values (10,'fake10@fake.com','Christy','Pew','password','christy',6,'http://icons.iconarchive.com/icons/hopstarter/face-avatars/256/Female-Face-FI-2-icon.png');
+values (10,'fake10@fake.com','Christy','Pew','a','christy',6,'http://icons.iconarchive.com/icons/hopstarter/face-avatars/256/Female-Face-FI-2-icon.png');
 
 
 -- groups

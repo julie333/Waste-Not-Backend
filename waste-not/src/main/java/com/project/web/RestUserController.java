@@ -1,10 +1,6 @@
 package com.project.web;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.ManyToMany;
-import javax.persistence.OrderBy;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.project.domain.Group;
 import com.project.domain.JsonViews;
@@ -36,38 +31,53 @@ public class RestUserController {
 	private final LocationService locationservice;
 
 	@Autowired
-	public RestUserController(UserService userService, GroupService groupservice, ProductService productservice, LocationService locationservice) {
+	public RestUserController(UserService userService, GroupService groupservice, ProductService productservice,
+			LocationService locationservice) {
 		this.userservice = userService;
 		this.groupservice = groupservice;
 		this.productservice = productservice;
 		this.locationservice = locationservice;
 	}
 
-//	createNewProduct
+	// createNewProduct
 	@PostMapping("/{id:[0-9]+}/createNewProduct")
-	public Product createNewProduct(@RequestBody Product postedProduct,@PathVariable Long id) {
+	public Product createNewProduct(@RequestBody Product postedProduct, @PathVariable Long id) {
 
 		postedProduct.setProductOwner(this.userservice.findById(id));
 		Product savedProduct = this.productservice.addNewProduct(postedProduct);
-		System.err.println(savedProduct);	
+		System.err.println(savedProduct);
 		return savedProduct;
 	}
-	
-	
-//	createNewGroup
+
+	// createNewProductForGroup
+	@PostMapping("/{id:[0-9]+}/createNewProduct/{groupId:[0-9]+}/")
+	public Product createNewProductForGroup(@RequestBody Product postedProduct, @PathVariable Long id,
+			@PathVariable Long groupId) {
+
+		postedProduct.setProductOwner(this.userservice.findById(id));
+		Product savedProduct = this.productservice.addNewProduct(postedProduct);
+		this.userservice.addToProductsSharedToGroup(savedProduct.getId(), groupId);
+		System.err.println(savedProduct);
+		return savedProduct;
+	}
+
+	// createNewGroup
 	@PostMapping("/{id:[0-9]+}/createNewGroup")
-	public Group createNewGroup(@RequestBody Group postedGroup,@PathVariable Long id) {
-		
+	public Group createNewGroup(@RequestBody Group postedGroup, @PathVariable Long id) {
+
 		User admin = this.userservice.findById(id);
 		postedGroup.setAdmin(admin);
 		Group savedGroup = this.groupservice.createGroup(postedGroup);
+		System.err.println(savedGroup);
+		System.err.println(savedGroup.getId());
+
 		this.userservice.joinGroup(admin.getId(), savedGroup.getId());
+
 		System.err.println(savedGroup);
 		return savedGroup;
 	}
-	
 
-//	List of Users
+	// List of Users
 	@GetMapping
 	@JsonView(JsonViews.Public.class)
 	public List<User> listAllUsers() {
@@ -104,11 +114,11 @@ public class RestUserController {
 
 	// Join/Leave Group
 	@GetMapping("/{userId}/groups/{groupId}/toggle")
-	public void joinEvent( @PathVariable Long userId, @PathVariable Long groupId) {
+	public void joinEvent(@PathVariable Long userId, @PathVariable Long groupId) {
 
 		User user = userservice.findById(userId);
 		Group group = this.groupservice.findById(groupId);
-		
+
 		this.userservice.removeFromGroupRequests(userId, groupId);
 
 		if (user.getGroups().contains(group)) {
@@ -147,12 +157,25 @@ public class RestUserController {
 		}
 	}
 
-	// Toggle ProductsRequested 
+	// Add/Remove Wishlist
+	@PostMapping("/{userId}/wishlist")
+	public void addToProductsPosted(@PathVariable Long userId, @RequestBody String wish) {
+
+		User user = userservice.findById(userId);
+		String wishAdd = wish.substring(1,wish.length()-1);
+		if (user.getWishList().contains(wishAdd)) {
+			this.userservice.editWishList(userId, wishAdd);
+		} else {
+			this.userservice.addToWishList(userId, wishAdd);
+		}
+	}
+
+	// Toggle ProductsRequested
 	// ProductId - Products Requested / UserId - User Requesting for product
-    // Product Owner should get notification
-    // Add to Product Owner's productsRequestedByOthers
-    // Add to user's productsRequestedByUser
-	
+	// Product Owner should get notification
+	// Add to Product Owner's productsRequestedByOthers
+	// Add to user's productsRequestedByUser
+
 	@GetMapping("/{userId}/productsRequested/{productId}/toggle")
 	public void addToProductsRequested(@PathVariable Long productId, @PathVariable Long userId) {
 
@@ -164,14 +187,15 @@ public class RestUserController {
 		} else {
 			this.userservice.addToProductsRequestedByUser(userId, productId);
 		}
-		
+
 	}
-	
+
 	@GetMapping("/grouprequest/add/{userId}/{groupId}")
-	public void addToGroupRequests(@PathVariable Long userId, @PathVariable Long groupId) {
+	public void addGroupRequests(@PathVariable Long userId, @PathVariable Long groupId) {
+
 		this.userservice.addToGroupRequests(userId, groupId);
 	}
-	
+
 	@GetMapping("/grouprequest/remove/{userId}/{groupId}")
 	public void removeGroupRequests(@PathVariable Long userId, @PathVariable Long groupId) {
 		this.userservice.removeFromGroupRequests(userId, groupId);
@@ -191,5 +215,4 @@ public class RestUserController {
 		System.err.println("deleteUserProduct");
 		this.userservice.deleteProductsPosted(id, productId);
 	}
-
 }

@@ -51,4 +51,6 @@ public interface UserService {
 	
 	public void removeFromGroupRequests(Long userId, Long groupId);
 	
+	public void addToProductsSharedToGroup(Long productId, Long groupId);
+	
 }

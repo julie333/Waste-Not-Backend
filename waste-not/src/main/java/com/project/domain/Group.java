@@ -11,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -28,6 +27,7 @@ import lombok.ToString;
 @Table(name = "groups")
 @EqualsAndHashCode(exclude = "id")
 @ToString(exclude = { "members", "admin" })
+
 public class Group implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -57,7 +57,6 @@ public class Group implements Serializable {
 	private User admin;
 
 	@ManyToMany
-	@OrderBy("last_name")
 	@JsonView(JsonViews.Public.class)
 	@JsonIgnoreProperties({ "productsPosted","productsShared","productsRecieved",
 		"productsRequestedByUser","productsRequestedByOthers","friends","location","groups",
@@ -66,11 +65,23 @@ public class Group implements Serializable {
 	
 	@ManyToMany
 	@JsonView(JsonViews.Public.class)
-	@JsonIgnoreProperties({ "productOwner" })
+
 	private List<Product> productsSharedToGroup = new ArrayList<>();
 
 
 	public Group() {
+	}
+
+
+	public Group(String groupName, String description, String groupImage, User admin, List<User> members,
+			List<Product> productsSharedToGroup) {
+		super();
+		this.groupName = groupName;
+		this.description = description;
+		this.groupImage = groupImage;
+		this.admin = admin;
+		this.members = members;
+		this.productsSharedToGroup = productsSharedToGroup;
 	}
 
 

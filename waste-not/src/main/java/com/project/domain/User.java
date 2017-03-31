@@ -58,6 +58,7 @@ public class User implements Serializable {
 	@Column(name = "username", nullable = false, length = 50)
 	private String username;
 
+	@JsonView(JsonViews.Public.class)
 	@Column(name = "password", nullable = false, length = 76)
 	private String password;
 
@@ -110,12 +111,12 @@ public class User implements Serializable {
 
 	@ManyToMany
 	@JsonView(JsonViews.Public.class)
-	@JsonIgnoreProperties({ "members" })
+//	@JsonIgnoreProperties({ "members" })
 	private List<Group> groups = new ArrayList<>();
 	
 	@ManyToMany
 	@JsonView(JsonViews.Public.class)
-	@JsonIgnoreProperties({ "members"})
+//	@JsonIgnoreProperties({ "members"})
 	private List<Group> groupRequests = new ArrayList<>();
 	
 	@ManyToMany

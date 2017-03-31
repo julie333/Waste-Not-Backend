@@ -91,7 +91,7 @@ public class DefaultUserService implements UserService {
 
 		User user = userRepository.findOne(userId);
 		Group group = groupRepository.findOne(groupId);
-
+		
 		// Add To user Groups
 		if (user.getGroups().isEmpty()) {
 			List<Group> groupsList = new ArrayList<>();
@@ -101,17 +101,28 @@ public class DefaultUserService implements UserService {
 		} else {
 			user.getGroups().add(group);
 		}
+		
+		//  Add To Group members
+		if (group.getMembers()==null || group.getMembers().isEmpty()) {
+			List<User> userList = new ArrayList<>();
+			 group.setMembers(userList);
+			 group.getMembers().add(user);
 
-		//// Add To Group members
-		// if (group.getMembers().size()<1) {
-		// List<User> userList = new ArrayList<>();
-		// group.setMembers(userList);
-		// group.getMembers().add(user);
-		//
-		// } else {
-		// group.getMembers().add(user);
-		//
-		// }
+		 } else {
+			 group.getMembers().add(user);
+			
+			 }
+
+//		// Add To Group members
+//		 if (group.getMembers().size()<1) {
+//		 List<User> userList = new ArrayList<>();
+//		 group.setMembers(userList);
+//		 group.getMembers().add(user);
+//		
+//		 } else {
+//		 group.getMembers().add(user);
+//		
+//		 }
 
 	}
 
@@ -343,31 +354,53 @@ public class DefaultUserService implements UserService {
 		User user = this.userRepository.findOne(userId);
 		Group group = this.groupRepository.findOne(groupId);
 
-		if (user.getGroupRequests().isEmpty()) {
-			List<Group> groupRequests = new ArrayList<>();
-			user.setGroupRequests(groupRequests);
-			user.getGroupRequests().add(group);
+		if (user.getGroups().contains(group)) {
+			
+			System.err.println("user is already in group");
 
 		} else {
-			user.getGroupRequests().add(group);
+
+			if (user.getGroupRequests().isEmpty()) {
+				List<Group> groupRequests = new ArrayList<>();
+				user.setGroupRequests(groupRequests);
+				user.getGroupRequests().add(group);
+
+			} else {
+				user.getGroupRequests().add(group);
+			}
+			System.err.println(user.getGroupRequests());
 		}
-		System.err.println(user.getGroupRequests());
 
 	}
 
 	@Override
 	public void removeFromGroupRequests(Long userId, Long groupId) {
-		
+
 		User user = this.userRepository.findOne(userId);
 		Group group = this.groupRepository.findOne(groupId);
-		
-		if(user.getGroupRequests().isEmpty()) {
+
+		if (user.getGroupRequests().isEmpty()) {
 
 		} else {
 			user.getGroupRequests().remove(group);
 		}
 	}
-	
 
+	@Override
+	public void addToProductsSharedToGroup(Long productId, Long groupId) {
+		
+		Product product = productRepository.findOne(productId);
+		Group group = this.groupRepository.findOne(groupId);
+
+		if (group.getProductsSharedToGroup().isEmpty()) {
+			List<Product> productsSharedList = new ArrayList<>();
+			group.setProductsSharedToGroup(productsSharedList);
+			group.getProductsSharedToGroup().add(product);
+
+		} else {
+			group.getProductsSharedToGroup().add(product);
+		}
+		
+	}
 
 }

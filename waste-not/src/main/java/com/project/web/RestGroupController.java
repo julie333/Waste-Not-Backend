@@ -38,5 +38,19 @@ public class RestGroupController {
 	public List<Group> listAllGroups() {
 		return this.groupservice.findAll();
 	}
-	
+	    
+	// Delete Group
+	@GetMapping("/deletegroup/{groupDeleteId}/")
+	public void deleteGroup(@PathVariable Long groupDeleteId) {
+
+		this.groupservice.deleteById(groupDeleteId);
+		System.err.println("deleteGroup");
+	}
 }
+
+//@DeleteMapping("/deletegroup/{groupDeleteId}/")
+//@ResponseStatus(HttpStatus.NO_CONTENT)
+//public void deleteGroup(@PathVariable Long groupDeleteId) throws IOException {
+//	this.groupservice.deleteById(groupDeleteId);
+//	System.err.println("deleteGroup");
+//}
