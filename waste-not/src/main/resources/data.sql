@@ -161,16 +161,16 @@ insert into  user_wish_list(user_id, wish_list) values (6,'Charger,Tools,Craft')
 
 
 -- users_products_shared
-insert into  users_products_shared(user_id, products_shared_id) values (1,1);
-insert into  users_products_shared(user_id, products_shared_id) values (1,4);
-insert into  users_products_shared(user_id, products_shared_id) values (2,2);
-insert into  users_products_shared(user_id, products_shared_id) values (3,6);
+--insert into  users_products_shared(user_id, products_shared_id) values (1,1);
+--insert into  users_products_shared(user_id, products_shared_id) values (1,4);
+--insert into  users_products_shared(user_id, products_shared_id) values (2,2);
+--insert into  users_products_shared(user_id, products_shared_id) values (3,6);
 
 -- users_products_recieved 
-insert into  users_products_recieved(user_id,  products_recieved_id ) values (1,6);
-insert into  users_products_recieved(user_id,  products_recieved_id ) values (2,4);
-insert into  users_products_recieved(user_id,  products_recieved_id ) values (3,2);
-insert into  users_products_recieved(user_id,  products_recieved_id ) values (4,1);
+--insert into  users_products_recieved(user_id,  products_recieved_id ) values (1,6);
+--insert into  users_products_recieved(user_id,  products_recieved_id ) values (2,4);
+--insert into  users_products_recieved(user_id,  products_recieved_id ) values (3,2);
+--insert into  users_products_recieved(user_id,  products_recieved_id ) values (4,1);
 
 
 

@@ -13,7 +13,7 @@ import com.project.domain.ProductCategory;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-	@Query("from Product p where lower(p.productName) like %?1% or lower(p.productCategory) like %?1%")
+	@Query("from Product p where lower(p.productName) like %?1% or lower(p.productCategory) like %?1% and p.available is true")
 	public List<Product> findByProductName(String productName);
 	
 	public List<Product> findByProductCategory(ProductCategory ProductCategory);
@@ -23,6 +23,5 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 	public List<Product> findByProductOwnerUsername(String username);
 
 	public List<Product> findByLocationCity(String city);
-
 }
 

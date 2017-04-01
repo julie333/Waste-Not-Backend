@@ -16,7 +16,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -76,18 +75,18 @@ public class User implements Serializable {
 	@Column(name = "wish_list")
 	private List<String> wishList;
 
-	@OneToMany(mappedBy = "productOwner",orphanRemoval=true)
+	@OneToMany(mappedBy = "productOwner", orphanRemoval = true)
 	@OrderBy("datePosted")
 	@JsonView(JsonViews.Public.class)
 	private List<Product> productsPosted = new ArrayList<>();
 
-//	When Products are successfully given away - Add To Products Shared
+	// When Products are successfully given away - Add To Products Shared
 	@OneToMany
 	@OrderBy("datePosted")
 	@JsonView(JsonViews.Public.class)
 	private List<Product> productsShared = new ArrayList<>();
 
-//	When Products are successfully accepted - Add To Products Received
+	// When Products are successfully accepted - Add To Products Received
 	@OneToMany
 	@OrderBy("datePosted")
 	@JsonView(JsonViews.Public.class)
@@ -106,23 +105,23 @@ public class User implements Serializable {
 	@ManyToMany
 	@JsonView(JsonViews.Public.class)
 	@JsonIgnoreProperties({ "email", "productsPosted", "productsShared", "productsRecieved", "productsRequestedByUser",
-			"productsRequestedByOthers", "friends", "location","groups", "friendsRequests", "groupRequests"})
+			"productsRequestedByOthers", "friends", "location", "groups", "friendsRequests", "groupRequests" })
 	private List<User> friends = new ArrayList<>();
 
 	@ManyToMany
 	@JsonView(JsonViews.Public.class)
-//	@JsonIgnoreProperties({ "members" })
+	// @JsonIgnoreProperties({ "members" })
 	private List<Group> groups = new ArrayList<>();
-	
+
 	@ManyToMany
 	@JsonView(JsonViews.Public.class)
-//	@JsonIgnoreProperties({ "members"})
+	// @JsonIgnoreProperties({ "members"})
 	private List<Group> groupRequests = new ArrayList<>();
-	
+
 	@ManyToMany
 	@JsonView(JsonViews.Public.class)
 	@JsonIgnoreProperties({ "email", "productsPosted", "productsShared", "productsRecieved", "productsRequestedByUser",
-			"productsRequestedByOthers", "friends", "location","groups", "friendsRequests", "groupRequests"})
+			"productsRequestedByOthers", "friends", "location", "groups", "friendsRequests", "groupRequests" })
 	private List<User> friendsRequests = new ArrayList<>();
 
 	public User() {
@@ -131,8 +130,8 @@ public class User implements Serializable {
 	public User(String firstName, String lastName, String email, String username, String password, String avatar,
 			Location location, List<Product> productsPosted, List<Product> productsShared,
 			List<Product> productsRecieved, List<Product> productsRequestedByUser,
-			List<Product> productsRequestedByOthers, List<User> friends, 
-			List<Group> groups,  List<Group> groupRequests, List<User> friendsRequests ) {
+			List<Product> productsRequestedByOthers, List<User> friends, List<Group> groups, List<Group> groupRequests,
+			List<User> friendsRequests) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;

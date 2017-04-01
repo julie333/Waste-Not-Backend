@@ -24,7 +24,7 @@ public interface ProductService {
 		
 		public List<Product> findByDatePosted(LocalDate date);
 		
-		public List<Product> findByProductOwnerUsername(String username);
+		public void handleProductRequest(Long userId,Long productId,String action);
 
 	}
 

@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -43,13 +43,13 @@ public class Product implements Serializable {
 	@Column(name = "product_name", nullable = false, length = 50)
 	@JsonView(JsonViews.Public.class)
 	private String productName;
-	
-	@Column(name = "product_category",  nullable = true, length = 50)
-	@JsonView(JsonViews.Public.class)
-    @Enumerated(EnumType.STRING)
-    private ProductCategory productCategory;
 
-	@Column(name = "date_posted",  nullable = true)
+	@Column(name = "product_category", nullable = true, length = 50)
+	@JsonView(JsonViews.Public.class)
+	@Enumerated(EnumType.STRING)
+	private ProductCategory productCategory;
+
+	@Column(name = "date_posted", nullable = true)
 	@JsonView(JsonViews.Public.class)
 	private LocalDate datePosted;
 
@@ -60,34 +60,38 @@ public class Product implements Serializable {
 	@Column(name = "product_image_url", nullable = true, length = 250)
 	@JsonView(JsonViews.Public.class)
 	private String productImageUrl;
-	
+
 	@Column(name = "pickup_location", nullable = true, length = 250)
 	@JsonView(JsonViews.Public.class)
 	private String pickupLocation;
-	
+
 	@Column(name = "pickup_time", nullable = true, length = 250)
 	@JsonView(JsonViews.Public.class)
 	private String pickupTime;
-	
+
 	@JsonView(JsonViews.Public.class)
 	@OneToOne(optional = true)
 	private Location location;
-	
+
 	@ManyToOne(optional = true)
 	@JsonView(JsonViews.Public.class)
-	@JsonIgnoreProperties({ "productsPosted","productsShared","productsRecieved",
-		"productsRequestedByUser","productsRequestedByOthers","friends","location","wishList","groups","friendsRequests", "groupRequests"}) 
+	@JsonIgnoreProperties({ "productsPosted", "productsShared", "productsRecieved", "productsRequestedByUser",
+			"productsRequestedByOthers", "friends", "location", "wishList", "groups", "friendsRequests",
+			"groupRequests" })
 	private User productOwner;
 
-	@Column(name = "available",  nullable = true)
+	@Column(name = "available", nullable = true)
 	@JsonView(JsonViews.Public.class)
 	private boolean available;
-	
+
 	// List of Users who have Requested for this product
+	@ManyToMany
 	@JsonView(JsonViews.Public.class)
-	@ElementCollection
 	@Column(name = "request_list")
-	private List<Long> requestList = new ArrayList<>();
+	@JsonIgnoreProperties({ "productsPosted", "productsShared", "productsRecieved", "productsRequestedByUser",
+			"productsRequestedByOthers", "friends", "location", "wishList", "groups", "friendsRequests",
+			"groupRequests" })
+	private List<User> requestList = new ArrayList<>();
 
 	public Product() {
 
@@ -95,7 +99,7 @@ public class Product implements Serializable {
 
 	public Product(String productName, ProductCategory productCategory, LocalDate datePosted, String description,
 			String productImageUrl, String pickupLocation, String pickupTime, Location location, boolean available,
-			List<Long> requestList) {
+			List<User> requestList) {
 		super();
 		this.productName = productName;
 		this.productCategory = productCategory;

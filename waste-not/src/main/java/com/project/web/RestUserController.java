@@ -187,7 +187,6 @@ public class RestUserController {
 		} else {
 			this.userservice.addToProductsRequestedByUser(userId, productId);
 		}
-
 	}
 
 	@GetMapping("/grouprequest/add/{userId}/{groupId}")

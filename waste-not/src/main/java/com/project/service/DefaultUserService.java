@@ -91,7 +91,7 @@ public class DefaultUserService implements UserService {
 
 		User user = userRepository.findOne(userId);
 		Group group = groupRepository.findOne(groupId);
-		
+
 		// Add To user Groups
 		if (user.getGroups().isEmpty()) {
 			List<Group> groupsList = new ArrayList<>();
@@ -101,28 +101,28 @@ public class DefaultUserService implements UserService {
 		} else {
 			user.getGroups().add(group);
 		}
-		
-		//  Add To Group members
-		if (group.getMembers()==null || group.getMembers().isEmpty()) {
+
+		// Add To Group members
+		if (group.getMembers() == null || group.getMembers().isEmpty()) {
 			List<User> userList = new ArrayList<>();
-			 group.setMembers(userList);
-			 group.getMembers().add(user);
+			group.setMembers(userList);
+			group.getMembers().add(user);
 
-		 } else {
-			 group.getMembers().add(user);
-			
-			 }
+		} else {
+			group.getMembers().add(user);
 
-//		// Add To Group members
-//		 if (group.getMembers().size()<1) {
-//		 List<User> userList = new ArrayList<>();
-//		 group.setMembers(userList);
-//		 group.getMembers().add(user);
-//		
-//		 } else {
-//		 group.getMembers().add(user);
-//		
-//		 }
+		}
+
+		// // Add To Group members
+		// if (group.getMembers().size()<1) {
+		// List<User> userList = new ArrayList<>();
+		// group.setMembers(userList);
+		// group.getMembers().add(user);
+		//
+		// } else {
+		// group.getMembers().add(user);
+		//
+		// }
 
 	}
 
@@ -262,7 +262,14 @@ public class DefaultUserService implements UserService {
 			userRequestingForProduct.getProductsRequestedByUser().add(product);
 		}
 
-		product.getRequestList().add(userRequestingForProduct.getId());
+		if (product.getRequestList().isEmpty()) {
+			List<User> requestList = new ArrayList<>();
+			product.setRequestList(requestList);
+			product.getRequestList().add(userRequestingForProduct);
+
+		} else {
+			product.getRequestList().add(userRequestingForProduct);
+		}
 
 		// Add To Product Owners ProductsRequestedByOthers List
 		if (productOwner.getProductsRequestedByOthers().isEmpty()) {
@@ -295,6 +302,7 @@ public class DefaultUserService implements UserService {
 
 		} else {
 			productOwner.getProductsRequestedByOthers().remove(product);
+			product.getRequestList().remove(userRequestingForProduct);
 		}
 
 	}
@@ -355,7 +363,7 @@ public class DefaultUserService implements UserService {
 		Group group = this.groupRepository.findOne(groupId);
 
 		if (user.getGroups().contains(group)) {
-			
+
 			System.err.println("user is already in group");
 
 		} else {
@@ -388,7 +396,7 @@ public class DefaultUserService implements UserService {
 
 	@Override
 	public void addToProductsSharedToGroup(Long productId, Long groupId) {
-		
+
 		Product product = productRepository.findOne(productId);
 		Group group = this.groupRepository.findOne(groupId);
 
@@ -400,7 +408,7 @@ public class DefaultUserService implements UserService {
 		} else {
 			group.getProductsSharedToGroup().add(product);
 		}
-		
+
 	}
 
 }
