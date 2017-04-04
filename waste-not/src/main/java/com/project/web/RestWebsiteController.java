@@ -104,7 +104,7 @@ public class RestWebsiteController {
 
 		String searchItem = searchedUser.substring(1, searchedUser.length() - 1);
 
-		System.err.println("HEREEEEEEEEE" + searchItem);
+		System.err.println("HERE" + searchItem);
 
 		users = this.userservice.findUsers(searchItem);
 

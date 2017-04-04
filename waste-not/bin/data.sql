@@ -24,7 +24,7 @@ insert into location(id,street,streetNO,postalcode,city,country) values (7,'Alph
 -- users
  
 insert into users(id, email,first_name,last_name,password,username,location_id, avatar) 
- values (1,'fake1@fake.com','Lola','Lolly','a','a',1,'http://icons.iconarchive.com/icons/hopstarter/face-avatars/128/Female-Face-FA-4-icon.png');
+ values (1,'fake1@fake.com','Lily','Potter','a','a',1,'http://icons.iconarchive.com/icons/hopstarter/face-avatars/128/Female-Face-FA-4-icon.png');
 
 insert into users(id, email,first_name,last_name,password,username,location_id, avatar) 
  values (2,'fake2@fake.com','Jenny','Jade','a','jenny',2,'http://icons.iconarchive.com/icons/hopstarter/face-avatars/128/Female-Face-FH-4-slim-icon.png');
