@@ -58,9 +58,9 @@ values (10,'fake10@fake.com','Christy','Pew','a','christy',6,'http://icons.icona
 insert into groups(id,description,group_name,admin_id,group_image) values (1,'Group From Work','Food Mates',1,'https://t3.ftcdn.net/jpg/00/68/95/46/240_F_68954664_mlJE0mMHPjSetDUbABgRjMULZMnKmgCO.jpg');
 insert into groups(id,description,group_name,admin_id,group_image) values (2,'Group From Neighbourhood','Neighbours',1,'https://t4.ftcdn.net/jpg/00/33/04/77/240_F_33047796_94uyyU5k8vi2thoiIMrBlF7UeoDCzhUz.jpg');
 insert into groups(id,description,group_name,admin_id,group_image) values (3,'Group of Friends','ReUseIT',2,'https://t3.ftcdn.net/jpg/00/84/41/72/240_F_84417253_oXspqHSvoQERIkM53oNRDghSSkQI3PWh.jpg');
-insert into groups(id,description,group_name,admin_id,group_image) values (4,'Group From Winti','Winti against Waste',3,'https://t4.ftcdn.net/jpg/01/06/57/29/240_F_106572993_NYr7c8INV64R7T6RHTrSpybOO8taLRRZ.jpg');
+insert into groups(id,description,group_name,admin_id,group_image) values (4,'Group From Winti','Winti against Waste',2,'https://t4.ftcdn.net/jpg/01/06/57/29/240_F_106572993_NYr7c8INV64R7T6RHTrSpybOO8taLRRZ.jpg');
 insert into groups(id,description,group_name,admin_id,group_image) values (5,'Group From Verein','Verein against Waste',3,'https://t3.ftcdn.net/jpg/01/36/75/58/240_F_136755886_KNnuZ8e8Y41Y7SUnafAgm9bhAhXoLB5V.jpg');
-insert into groups(id,description,group_name,admin_id,group_image) values (6,'Group From School','ReUseIT - School',4,'https://t4.ftcdn.net/jpg/01/06/57/29/240_F_106572993_NYr7c8INV64R7T6RHTrSpybOO8taLRRZ.jpg');
+insert into groups(id,description,group_name,admin_id,group_image) values (6,'Group From School','ReUseIT - School',3,'https://t4.ftcdn.net/jpg/01/06/57/29/240_F_106572993_NYr7c8INV64R7T6RHTrSpybOO8taLRRZ.jpg');
 insert into groups(id,description,group_name,admin_id,group_image) values (7,'Group From College','ReUseIT - College',5,'https://t4.ftcdn.net/jpg/00/33/47/51/240_F_33475194_bWazKqY4GqnKWh0ZW1VWHjdi7bfWVLzx.jpg');
 insert into groups(id,description,group_name,admin_id,group_image) values (8,'Group From Church','ReUseIT - Church',5,'https://t3.ftcdn.net/jpg/01/25/11/64/240_F_125116470_wClwGpNIwmElCIgbtV6OYcL5HPWYXZjJ.jpg');
 
@@ -68,7 +68,7 @@ insert into groups(id,description,group_name,admin_id,group_image) values (8,'Gr
 
 insert into products(id,product_name, description,available,date_posted,pickup_location,pickup_time,product_category,product_owner_id,product_image_url) 
 values (1,'Chair','Good Condition, Reason - Shifting to new house',true,'2017-01-01','Bahnhof-Winti', '17:00:00', 'FURNITURE', 1,'https://t4.ftcdn.net/jpg/00/89/61/13/240_F_89611334_wLGS8fNld3aLm7YhBjX17pZaNFyS4lCr.jpg');
-  
+ 
 insert into products(id,product_name, description,available,date_posted,pickup_location,pickup_time,product_category,product_owner_id,product_image_url) 
 values (2,'Assorted Teas','Good Condition, Reason - Dont drink Tea',true,'2017-02-02','Bahnhof-Winti', '17:00:00', 'FOOD', 2,'https://t4.ftcdn.net/jpg/00/94/01/43/240_F_94014353_9h3fG8vWsPv82parrCo1GO7fVCZDY4cY.jpg');
     
@@ -107,21 +107,36 @@ values (13,'Muffins','Good Condition, Reason - Made too many',true,'2017-03-03',
   
 insert into products(id,product_name, description,available,date_posted,pickup_location,pickup_time,product_category,product_owner_id,product_image_url) 
 values (14,'Croissants','Good Condition, Reason - Over Production',true,'2017-06-06','Bahnhof-Winti', '17:00:00', 'FOOD', 4,'http://www.bangbangent.com/images/product-placeholder.jpg');
+
+insert into products(id,product_name, description,available,date_posted,pickup_location,pickup_time,product_category,product_owner_id,product_image_url) 
+values (15,'Trail Mix','Opened, Reason - Allergic to nuts',true,'2017-01-01','Bahnhof-Winti', '17:00:00', 'FOOD', 1,'http://www.snacksoveramerica.com/Merchant2/graphics/00000001/kars_energy.gif');
+
+insert into products(id,product_name, description,available,date_posted,pickup_location,pickup_time,product_category,product_owner_id,product_image_url) 
+values (16,'T Shirt','Worn, Reason - Dont like the color so much',true,'2017-01-01','Bahnhof-Winti', '17:00:00', 'CLOTHES', 2,'http://static3.businessinsider.com/image/574352c952bcd0210c8c48ae-1500-1125/eat-sleep-code-tshirt.jpg');
+ 
+insert into products(id,product_name, description,available,date_posted,pickup_location,pickup_time,product_category,product_owner_id,product_image_url) 
+values (17,'Knitting Kit','Opened, Reason - No time for knitting',true,'2017-01-01','Bahnhof-Winti', '17:00:00', 'MISCELLANEOUS', 2,'http://ab.weimgs.com/weimgs/ab/images/wcm/products/201711/0426/img69c.jpg');
  
  
 -- users_groups;
 insert into users_groups(user_id, groups_id) values (1,1);
 insert into users_groups(user_id, groups_id) values (2,1);
-insert into users_groups(user_id, groups_id) values (3,1);
-insert into users_groups(user_id, groups_id) values (1,2);
 insert into users_groups(user_id, groups_id) values (1,3);
-insert into users_groups(user_id, groups_id) values (2,2);
-insert into users_groups(user_id, groups_id) values (3,3);
+insert into users_groups(user_id, groups_id) values (3,1);
 insert into users_groups(user_id, groups_id) values (4,1);
-insert into users_groups(user_id, groups_id) values (4,5);
+insert into users_groups(user_id, groups_id) values (1,2);
+insert into users_groups(user_id, groups_id) values (4,2);
+insert into users_groups(user_id, groups_id) values (4,3);
+insert into users_groups(user_id, groups_id) values (2,3);
+insert into users_groups(user_id, groups_id) values (5,7);
+insert into users_groups(user_id, groups_id) values (5,8);
 insert into users_groups(user_id, groups_id) values (5,4);
 insert into users_groups(user_id, groups_id) values (6,3);
 insert into users_groups(user_id, groups_id) values (7,5);
+insert into users_groups(user_id, groups_id) values (2,4);
+insert into users_groups(user_id, groups_id) values (3,5);
+insert into users_groups(user_id, groups_id) values (3,6);
+
 
 -- groups_members 
 insert into groups_members(group_id, members_id) values (1,1);
@@ -160,24 +175,11 @@ insert into  user_wish_list(user_id, wish_list) values (5,'Coffee,Baby Stuff');
 insert into  user_wish_list(user_id, wish_list) values (6,'Charger,Tools,Craft');
 
 
--- users_products_shared
---insert into  users_products_shared(user_id, products_shared_id) values (1,1);
---insert into  users_products_shared(user_id, products_shared_id) values (1,4);
---insert into  users_products_shared(user_id, products_shared_id) values (2,2);
---insert into  users_products_shared(user_id, products_shared_id) values (3,6);
-
--- users_products_recieved 
---insert into  users_products_recieved(user_id,  products_recieved_id ) values (1,6);
---insert into  users_products_recieved(user_id,  products_recieved_id ) values (2,4);
---insert into  users_products_recieved(user_id,  products_recieved_id ) values (3,2);
---insert into  users_products_recieved(user_id,  products_recieved_id ) values (4,1);
-
-
-
-
 -- groups_products_shared_to_group
 
 insert into groups_products_shared_to_group(group_id,  products_shared_to_group_id ) values (1,1);
+insert into groups_products_shared_to_group(group_id,  products_shared_to_group_id ) values (1,15);
+insert into groups_products_shared_to_group(group_id,  products_shared_to_group_id ) values (1,4);
 insert into groups_products_shared_to_group(group_id,  products_shared_to_group_id ) values (2,2);
 insert into groups_products_shared_to_group(group_id,  products_shared_to_group_id ) values (1,3);
 insert into groups_products_shared_to_group(group_id,  products_shared_to_group_id ) values (2,4);

@@ -122,9 +122,10 @@ public class DefaultProductService implements ProductService {
 			product.getRequestList().remove(userRequested);
 
 		} else if (action.contentEquals("No")) {
-			System.err.println("No  Selected");
+			System.err.println("No Selected");
 			userRequested.getProductsRequestedByUser().remove(product);
 			product.getRequestList().remove(userRequested);
+			productOwner.getProductsRequestedByOthers().remove(product);
 
 		} else if (action.contentEquals("Gone")) {
 			System.err.println("Gone Action Selected");
